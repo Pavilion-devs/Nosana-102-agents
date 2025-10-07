@@ -39,3 +39,11 @@ Thumbs.db
 # Misc
 *.log
 .turbo
+
+# Local docs and reports (do not version)
+prd.txt
+QUICKSTART.md
+SETUP.md
+STATUS.md
+TEST_RESULTS.md
+TESTING_GUIDE.md
