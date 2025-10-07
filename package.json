@@ -1,0 +1,28 @@
+{
+  "name": "nexus-iot",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AI Agent for IoT Device Monitoring & Control",
+  "scripts": {
+    "dev": "concurrently \"pnpm --filter server dev\" \"pnpm --filter frontend dev\" \"pnpm --filter mcp-server dev\"",
+    "dev:server": "pnpm --filter server dev",
+    "dev:frontend": "pnpm --filter frontend dev",
+    "dev:mcp": "pnpm --filter mcp-server dev",
+    "build": "pnpm --filter server build && pnpm --filter frontend build && pnpm --filter mcp-server build",
+    "clean": "pnpm --filter server clean && pnpm --filter frontend clean && pnpm --filter mcp-server clean"
+  },
+  "workspaces": [
+    "server",
+    "frontend",
+    "mcp-server",
+    "shared"
+  ],
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "typescript": "^5.7.3"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=8.0.0"
+  }
+}

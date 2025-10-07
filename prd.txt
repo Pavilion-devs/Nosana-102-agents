@@ -1,0 +1,280 @@
+# 🧠 **Product Requirements Document (PRD)**
+
+### Project Title: **NEXUS — AI Agent for IoT Device Monitoring & Control**
+
+---
+
+## 🚀 **1. Overview**
+
+**NEXUS** is a **production-ready AI agent application** that provides **real-time control and monitoring** for IoT devices (e.g., smart plugs, sensors, temperature monitors) through a **Next.js dashboard** powered by the **Model Context Protocol (MCP)**.
+
+The system enables users to interact with their connected devices naturally (via chat or voice), while the backend agents handle data interpretation, device management, and synchronization across the UI in real time.
+
+---
+
+## 🎯 **2. Problem Statement**
+
+IoT systems today are fragmented — users must manage multiple dashboards for different devices or rely on limited native apps.
+NEXUS unifies this into a **single AI-driven interface** that:
+
+* Monitors device data in real time
+* Automates device control via intelligent agent reasoning
+* Provides contextual insights (“your room temperature has been rising for 30 minutes; should I turn on the fan?”)
+
+---
+
+## 💡 **3. Solution Summary**
+
+A **Mastra AI agent** (using MCP) connects with a **set of IoT simulators** (or live devices) via APIs or MQTT.
+It collects data, manages control commands, and interacts with users through a clean, reactive **Next.js dashboard**.
+
+When a device state changes, the agent updates the UI instantly (bi-directional sync).
+
+---
+
+## 🧩 **4. Core Features**
+
+| Feature                            | Description                                                                           | Tools & Components                            |
+| ---------------------------------- | ------------------------------------------------------------------------------------- | --------------------------------------------- |
+| **Device Registry (MCP Resource)** | Agent stores and manages metadata for devices (ID, type, status, last activity, etc.) | MCP Server, Node.js backend with typescript                  |
+| **Real-Time Monitoring**           | Continuous updates of temperature, power, or motion data displayed on UI charts       | MQTT / WebSocket, Redis PubSub                |
+| **AI Command Center**              | Chat/voice interface where user issues commands (e.g., “turn off device 2”)           | Mastra Agent, OpenAI/claude API               |
+| **Automation Rules**               | Agent learns behavior and creates rules (“if temp > 30°C, turn fan on”)               | Local rule engine or lightweight LangGraph    |
+| **Dynamic Dashboard (Next.js)**    | Real-time visualization of device data and controls                                   | Next.js, React Query, Tailwind, Framer Motion |
+| **Instant UI Sync**                | Device changes reflected immediately                                                  | WebSocket, MCP tool triggers                  |
+| **Device Simulator**               | For demo, simulate sensors with random but realistic values                           | Node.js script or Python microservice         |
+| **Authentication**                 | Basic user login for demo                                                             | Basic login or supabase                          |
+| **Nosana Deployment**              | Deploy backend + MCP server on Nosana Network                                         | Nosana CLI / Docker                           |
+
+---
+
+## ⚙️ **5. System Architecture**
+
+```
+[User]
+   ↓
+[Next.js Frontend]
+   ↕ WebSocket
+[Mastra AI Agent Layer]
+   ↕ MCP Protocol
+[MCP Server + Tools]
+   ↕
+[IoT Devices / Simulators / MQTT Broker]
+```
+
+### Components:
+
+* **Frontend (Next.js)**: Interactive dashboard for real-time updates
+* **Agent (Mastra)**: Brain that interprets context, decisions, and commands
+* **MCP Server**: Manages tools/resources like device states and control actions
+* **IoT Simulator**: Feeds sensor data (e.g., temperature, humidity, power)
+* **Nosana Network**: Hosts backend services for distributed deployment
+
+---
+
+## 🔧 **6. Tools & Resources**
+
+| Category              | Tools / Frameworks                                   |
+| --------------------- | ---------------------------------------------------- |
+| **Frontend**          | Next.js, Tailwind CSS, React Query, Framer Motion    |
+| **AI Agent Layer**    | Mastra, OpenAI / Gemini API, LangGraph (optional)    |
+| **Protocol Layer**    | MCP Server (Model Context Protocol), Node.js         |
+| **IoT Data Handling** | MQTT (Mosquitto), WebSocket, Redis PubSub            |
+| **Backend Framework** | Nodejs         + Typescript                      |
+| **Database**          | Supabase / SQLite (for state persistence) |
+| **Deployment**        | Nosana CLI, Docker, Vercel (frontend)                |
+| **Monitoring & Logs** | Datadog / Logtail / OpenTelemetry                    |
+| **Dev Tools**         | GitHub Codespaces, Postman, pnpm                     |
+
+---
+
+## 🧠 **7. MCP Tools to Implement (Minimum 2 Required)**
+
+| MCP Tool                   | Purpose                                                 |
+| -------------------------- | ------------------------------------------------------- |
+| **DeviceManagerTool**      | Add, remove, and list registered devices with metadata  |
+| **DeviceControlTool**      | Send control commands (turn on/off, adjust speed, etc.) |
+| **TelemetryTool (Bonus)**  | Stream sensor readings to the UI in real time           |
+| **AutomationTool (Bonus)** | Manage simple if-then automation rules                  |
+
+---
+
+## 🧭 **8. User Flow**
+
+1. **User logs in** to dashboard
+2. **Agent greets user** and lists connected devices
+3. **Real-time device data** streams in (e.g., “Room Sensor A: 29.4°C”)
+4. **User sends command** (“turn on fan”) via chat or button
+5. **Agent validates command**, updates device state, UI syncs instantly
+6. **Agent suggests automation rule** based on patterns
+
+---
+
+## 🧩 **9. AI Agent Capabilities**
+
+* Understand natural commands (“show all active devices”)
+* Generate summaries (“average room temp today was 27°C”)
+* Control connected devices intelligently
+* Propose optimizations or rules
+* Keep session context (per user)
+
+---
+
+## 📈 **10. Success Metrics**
+
+| Metric                     | Target                                      |
+| -------------------------- | ------------------------------------------- |
+| **UI Latency**             | < 1s update delay after device state change |
+| **MCP Tool Functionality** | 100% test coverage for 2+ tools             |
+| **Uptime (Nosana)**        | 99% during demo                             |
+| **User Satisfaction**      | Smooth real-time control and clean UI       |
+| **Innovation Score**       | Clear use of MCP + agent reasoning          |
+
+---
+
+## 🎨 **11. Design Goals**
+
+* Minimalist UI (dark theme dashboard)
+* Card-based device layout
+* Animated status transitions
+* Real-time metrics visualization (line/bar charts)
+
+---
+
+## 🧰 **12. Development Phases**
+
+| Phase                             | Description                                              | Duration |
+| --------------------------------- | -------------------------------------------------------- | -------- |
+| **Phase 1:** Setup & Architecture | Setup monorepo, MCP, Mastra, and Next.js                 | 3 days   |
+| **Phase 2:** MCP Tools            | Build and test DeviceManagerTool & DeviceControlTool     | 3 days   |
+| **Phase 3:** Agent Logic          | Implement command understanding and reasoning            | 2 days   |
+| **Phase 4:** UI & Real-Time Sync  | Create dashboard, connect WebSocket updates              | 3 days   |
+| **Phase 5:** Deployment           | Deploy MCP + Agent backend to Nosana, frontend to Vercel | 2 days   |
+| **Phase 6:** Docs & Polishing     | Add README, architecture diagram, demo video             | 1–2 days |
+
+---
+
+## 🏆 **13. Why This Can Win**
+
+* ✅ **Real-world relevance** (IoT control is tangible and impactful)
+* ✅ **Full-stack architecture mastery** (frontend + MCP + AI agent + real-time backend)
+* ✅ **Polished UX/UI** (clean, reactive dashboard)
+* ✅ **Advanced MCP usage** (dynamic tools & resource updates)
+* ✅ **Scalable deployment** (Nosana integration for distributed reliability)
+
+---
+
+🧠 Primary Use Case: Smart Energy Management in Homes or Offices
+
+Imagine a smart workspace (or home) equipped with several IoT devices:
+
+Smart lights
+
+Air conditioners
+
+Fans
+
+Temperature sensors
+
+Power sockets
+
+Your NEXUS AI Agent manages all these in real time.
+
+🏠 Scenario Example:
+
+The AI agent monitors temperature, occupancy, and device power consumption in real time and automatically adjusts devices to optimize comfort and save energy.
+
+Step-by-Step:
+
+Data Collection
+
+The IoT sensors send live data:
+
+Temperature: 31°C
+
+Room Occupancy: true
+
+Devices: Fan (off), AC (off)
+
+AI Reasoning
+
+The NEXUS agent detects the room is too hot and occupied.
+
+It asks: “It’s currently 31°C and you’re in the room. Should I turn on the fan or AC?”
+
+User Command or Auto-Decision
+
+User says: “Turn on the fan for 10 minutes.”
+
+The AI turns it on and updates the dashboard instantly.
+
+Real-Time Dashboard
+
+UI shows “Fan: ON” with live power consumption.
+
+Graph shows temperature gradually decreasing.
+
+Automation
+
+After a week of similar behavior, NEXUS suggests:
+“Would you like me to automatically turn on the fan when the temperature exceeds 30°C while you’re in the room?”
+
+Energy Optimization
+
+Monthly report:
+“You saved 12% electricity this week by using smart schedules.”
+
+⚡ Real-World Use Cases (After the Hackathon)
+1. Smart Home Automation
+
+Voice or chat control for all smart devices
+
+Predictive automation (“turn off lights when no one’s in the room”)
+
+Energy dashboards with historical analytics
+
+2. Industrial Equipment Monitoring
+
+Real-time temperature, vibration, or pressure monitoring of machinery
+
+AI alerts when readings exceed safe limits
+
+Preventive maintenance scheduling
+
+3. Agricultural Monitoring
+
+Sensors track soil moisture, temperature, humidity
+
+Agent automatically activates irrigation pumps
+
+Dashboard shows live field data and growth insights
+
+4. Smart Campus / Office Buildings
+
+Detect occupied rooms and optimize lighting or HVAC usage
+
+AI assistant reports daily consumption
+
+Syncs with Google Calendar to pre-cool meeting rooms before events
+
+5. Healthcare & Elderly Care
+
+Monitors air quality, humidity, temperature, and patient activity
+
+Alerts caretakers if conditions become unsafe
+
+Integrates with wearables to ensure comfort and safety
+
+6. Retail / Smart Store Management
+
+Monitors refrigeration units, lighting, and door sensors
+
+AI detects anomalies and suggests cost-saving measures
+
+🧩 Why Judges Will Love This
+
+It’s real, not just theoretical — you can simulate this using data streams.
+
+It shows AI reasoning + IoT control + real-time visualization working together.
+
+It’s extendable — could plug into home devices, factory sensors, or edge IoT hardware.
